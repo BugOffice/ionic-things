@@ -20,14 +20,23 @@ export class HomePage {
     private storage: Storage) 
     {
       this.model = new User();
-      this.model.nome = 'Sardinha Manu';//navParams.data.nome;
+      let nome = this.model.nome;
       this.model.token = navParams.data.token;
-      this.model.token_push = navParams.data.token_push;
+      console.log(nome);
+     // this.model.token_push = navParams.data.token_push;
     }
     
     logout(){
-      this.navCtrl.setRoot(LoginPage);
+      //this.navCtrl.setRoot(LoginPage);
+      
       this.storage.set('loged', 'false');
+      this.storage.get('login_token').then((val) => {
+        this.userProvider.logout(val);
+        console.log('Value of token, get of Storage: '+val);
+      });
+      this.navCtrl.insert(0,LoginPage);
+      this.navCtrl.popToRoot();
+
     }
 }
 

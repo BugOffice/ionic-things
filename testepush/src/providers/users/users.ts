@@ -36,6 +36,22 @@ export class UsersProvider {
     });
   }
 
+  logout(token: string){
+    return new Promise((resolve, reject) =>{
+      
+      this.http.get(this.API_URL + 'logout/'+token)
+        .subscribe(
+          (result: any) => {
+            console.log(result);
+            resolve(result.json());
+          },
+          error => {
+            console.log(error);
+            resolve();
+          });
+    });
+  }
+
   // getAll(page: number) {
   //   return new Promise((resolve, reject) => {
 
