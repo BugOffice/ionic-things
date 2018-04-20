@@ -4,7 +4,8 @@ import 'rxjs/add/operator/map';
  
 @Injectable()
 export class UsersProvider {
-  private API_URL = 'http://189.115.45.138:8081/webservice/rest/appi/'
+  private API_URL_EXT = 'http://189.115.45.138:8081/webservice/rest/appi/';
+  private API_URL = 'http://172.16.4.17:8081/webservice/rest/appi/';
   public token: string;
   //private headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT, OPTIONS, HEAD' });
   //private options = new RequestOptions({ headers: this.headers });

@@ -27,7 +27,7 @@ export class HomePage {
     
     logout(){
       this.navCtrl.setRoot(LoginPage);
-      this.storage.set('loged', 'true');
+      this.storage.set('loged', 'false');
     }
 }
 
