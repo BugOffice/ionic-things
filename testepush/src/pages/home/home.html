@@ -1,18 +1,20 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Rest Api Example
+      Home - Api H.E
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <h1 text-center margin-bottom>Exemplo de API REST</h1>
+  <h1 text-center margin-bottom>Página Inicial</h1>
 
   <ion-label stacked ng-value=""></ion-label>
 
-  <button ion-button block (click)="logout()" color="danger">Deslogar</button>
+  <span>Nome: {{nome}}</span>
+
+  <button ion-button block (click)="logout()" color="danger">Encerrar sessão</button>
 
 
 </ion-content>

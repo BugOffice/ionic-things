@@ -22,8 +22,17 @@ export class LoginPage {
     {
       this.isLoged();
       this.model = new User();
-      this.model.crm = '015761';
-      this.model.password = 'Aebel13@';
+      this.model.crm = '';
+      this.model.password = '';
+      this.model.token = '';
+      
+      this.storage.get('login_token').then((val) => {
+        this.model.token = val;
+        console.log('Value of token storaged in browser: '+val);
+        if(this.model.token){
+          this.openHomePage();
+        }
+      });
     }
 
   login() {
@@ -31,7 +40,14 @@ export class LoginPage {
     this.userProvider.login(this.model.crm, this.model.password)
       .then((result: any) => {
           this.toast.create({ message: 'Usuário logado com sucesso. Token: ' + result.token, position: 'botton', duration: 3000 }).present();
+          //console.log(result.token);
           
+          this.model = result;
+          console.log(this.model.token);
+          this.storage.set('login_token', this.model.token);
+          console.log(this.storage.get('login_token'))
+          //console.log(this.model.nome);
+          //console.log(this.model.crm);
           this.openHomePage();
            
         //Salvar o token no Ionic Storage para usar em futuras requisições.
@@ -45,6 +61,10 @@ export class LoginPage {
       this.presentLoading();
   }
 
+
+
+
+
   presentLoading() {
     this.loadingCtrl.create({
       content: 'Por favor aguarde...',
@@ -54,11 +74,11 @@ export class LoginPage {
   }
 
   openHomePage(){
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(HomePage,this.model);
   }
 
   isLoged(){
-    let loged;
+    
     this.storage.get('loged').then((val) =>{
       if(val == 'true'){
         this.openHomePage();
