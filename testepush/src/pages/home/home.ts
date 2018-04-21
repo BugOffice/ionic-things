@@ -20,9 +20,15 @@ export class HomePage {
     private storage: Storage) 
     {
       this.model = new User();
-      let nome = this.model.nome;
+      
+      this.storage.get('login_nome').then((val) => {
+        this.model.nome = val;
+      });
+      this.storage.get('login_usuario').then((val) => {
+        this.model.crm = val;
+      });
       this.model.token = navParams.data.token;
-      console.log(nome);
+      console.log(this.model.nome);
      // this.model.token_push = navParams.data.token_push;
     }
     
@@ -33,6 +39,7 @@ export class HomePage {
       this.storage.get('login_token').then((val) => {
         this.userProvider.logout(val);
         console.log('Value of token, get of Storage: '+val);
+        this.storage.set('login_token',null);
       });
       this.navCtrl.insert(0,LoginPage);
       this.navCtrl.popToRoot();
@@ -44,4 +51,5 @@ export class User {
   nome: string;
   token: string;
   token_push: string;
+  crm: string;
 }
