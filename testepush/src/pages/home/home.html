@@ -1,20 +1,28 @@
 <ion-header>
+  
   <ion-navbar>
-    <ion-title>
-      Home - Api H.E
-    </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only class="btn-contact">
+        <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!--<ion-title>Usuário</ion-title> -->
+
+   
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <h1 text-center margin-bottom>Página Inicial</h1>
+  
 
-  <ion-label stacked ng-value=""></ion-label>
+  
 
-  <span>Nome: {{nome}}</span>
-
-  <button ion-button block (click)="logout()" color="danger">Encerrar sessão</button>
+  <div>
+    <h5>Nome: {{model.nome}}</h5>
+    <h5>Usuário: {{model.crm}}</h5>
+  </div>
+  <button ion-button block (click)="logout()" color="danger" class="btn-logout">Encerrar sessão</button>
 
 
 </ion-content>

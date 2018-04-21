@@ -31,6 +31,12 @@ export class LoginPage {
         console.log('Value of token storaged in browser: '+val);
         if(this.model.token){
           this.openHomePage();
+          this.storage.get('login_nome').then((val) => {
+            this.model.medico = val;
+          });
+          this.storage.get('login_usuario').then((val) => {
+            this.model.crm = val;
+          });
         }
       });
     }
@@ -43,9 +49,10 @@ export class LoginPage {
           //console.log(result.token);
           
           this.model = result;
-          console.log(this.model.token);
+          console.log(this.model.medico);
           this.storage.set('login_token', this.model.token);
-          console.log(this.storage.get('login_token'))
+          this.storage.set('login_nome', this.model.medico);
+          this.storage.set('login_usuario', this.model.crm);
           //console.log(this.model.nome);
           //console.log(this.model.crm);
           this.openHomePage();
@@ -88,7 +95,7 @@ export class LoginPage {
 }
 
 export class User {
-  nome: string;
+  medico: string;
   crm: string;
   password: string;
   token: string;
