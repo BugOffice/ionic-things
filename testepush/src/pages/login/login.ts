@@ -28,7 +28,10 @@ export class LoginPage {
     }
 
   login() {
+    console.log(this.model.crm+"\n"+this.model.password);
+    if((this.model.crm != null && this.model.crm.length >= 5) && (this.model.password != null && this.model.password.length >= 5)){
 
+    
     this.userProvider.login(this.model.crm, this.model.password, this.model.token_push)
       .then((result: any) => {
           this.toast.create({ message: 'Usuário logado com sucesso. Token: ' + result.token, position: 'botton', duration: 3000 }).present();
@@ -52,6 +55,14 @@ export class LoginPage {
         this.toast.create({ message: 'Erro ao efetuar login. Erro: ' + error.error, position: 'botton', duration: 3000 }).present();
       });
       this.presentLoading();
+    }else{
+        let toast = this.toast.create({
+        message: 'Preencha os dados de login corretamente!',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
   }
 
   presentLoading() {
@@ -65,6 +76,8 @@ export class LoginPage {
   openHomePage(){
     this.navCtrl.setRoot(HomePage,this.model);
   }
+
+
 
 }
 
