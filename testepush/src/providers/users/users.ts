@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map';
  
 @Injectable()
 export class UsersProvider {
-  private API_URL_EXT = 'http://189.115.45.138:8081/webservice/rest/appi/';
-  private API_URL = 'http://172.16.4.17:8081/webservice/rest/appi/';
+  private API_URL = 'http://189.115.45.138:8081/webservice/rest/appi/';
+  private API_URL_EXT = 'http://172.16.4.17:8081/webservice/rest/appi/';
   public token: string;
   //private header = new Headers();
   
@@ -15,12 +15,13 @@ export class UsersProvider {
 
   constructor(public http: Http) { }
 
-  login(login: string, password: string) {
+  login(login: string, password: string, token_push: string) {
     return new Promise((resolve, reject) => {
 
       let postParams =  {
         'crm': login,
-        'password': password
+        'password': password,
+        'token_push': token_push
       };
 
       //this.header.append('Content-Type','application/json');

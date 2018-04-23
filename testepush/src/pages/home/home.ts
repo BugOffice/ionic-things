@@ -20,7 +20,12 @@ export class HomePage {
     private storage: Storage) 
     {
       this.model = new User();
-      
+      this.storage.get('login_nome').then((val) => {
+        this.model.medico = val;
+      });
+      this.storage.get('login_usuario').then((val) => {
+        this.model.crm = val;
+      });
       this.storage.get('login_nome').then((val) => {
         this.model.nome = val;
       });
@@ -48,6 +53,7 @@ export class HomePage {
 }
 
 export class User {
+  medico: string;
   nome: string;
   token: string;
   token_push: string;
