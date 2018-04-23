@@ -20,30 +20,16 @@ export class LoginPage {
     public storage: Storage
   ) 
     {
-      this.isLoged();
+
       this.model = new User();
       this.model.crm = '';
       this.model.password = '';
       this.model.token = '';
-      
-      this.storage.get('login_token').then((val) => {
-        this.model.token = val;
-        console.log('Value of token storaged in browser: '+val);
-        if(this.model.token){
-          this.openHomePage();
-          this.storage.get('login_nome').then((val) => {
-            this.model.medico = val;
-          });
-          this.storage.get('login_usuario').then((val) => {
-            this.model.crm = val;
-          });
-        }
-      });
     }
 
   login() {
 
-    this.userProvider.login(this.model.crm, this.model.password)
+    this.userProvider.login(this.model.crm, this.model.password, this.model.token_push)
       .then((result: any) => {
           this.toast.create({ message: 'Usuário logado com sucesso. Token: ' + result.token, position: 'botton', duration: 3000 }).present();
           //console.log(result.token);
@@ -68,10 +54,6 @@ export class LoginPage {
       this.presentLoading();
   }
 
-
-
-
-
   presentLoading() {
     this.loadingCtrl.create({
       content: 'Por favor aguarde...',
@@ -84,14 +66,6 @@ export class LoginPage {
     this.navCtrl.setRoot(HomePage,this.model);
   }
 
-  isLoged(){
-    
-    this.storage.get('loged').then((val) =>{
-      if(val == 'true'){
-        this.openHomePage();
-      }
-    });
-  }
 }
 
 export class User {
