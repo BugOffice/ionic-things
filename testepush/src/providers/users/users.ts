@@ -16,6 +16,7 @@ export class UsersProvider {
   constructor(public http: Http) { }
 
   login(login: string, password: string, token_push: string) {
+    
     return new Promise((resolve, reject) => {
 
       let postParams =  {
@@ -42,6 +43,7 @@ export class UsersProvider {
       
         
     });
+ 
   }
 
   logout(token: string){

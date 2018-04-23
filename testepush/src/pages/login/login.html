@@ -1,42 +1,42 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Login - Api H.E
-    </ion-title>
-  </ion-navbar>
+  
 </ion-header>
 
 <div class="container text-center">
+  <form #form="ngForm" (ngSubmit)="login()" >
   <ion-grid>
     <ion-list>
       <ion-row>
-        <ion-col col-8 col-sm-10>
+        <ion-col col-12 col-sm-12>
           <ion-item>
             <ion-label><ion-icon name="person"></ion-icon></ion-label>
-            <ion-input type="text" placeholder="Usuário" name="email"  [(ngModel)]="model.crm"></ion-input>
+            <ion-input color="light" pattern=".{3,}" required type="text" placeholder="Usuário" name="email"  [(ngModel)]="model.crm"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col col-8 col-sm-10>
+        <ion-col col-12 col-sm-12>
           <ion-item>
             <ion-label><ion-icon name="eye-off"></ion-icon></ion-label>
-            <ion-input type="password" placeholder="Senha" name="password" [(ngModel)]="model.password"></ion-input>
+            <ion-input color="light" required type="password" placeholder="Senha" name="password" [(ngModel)]="model.password"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
 
     
     </ion-list>
-    <ion-row>
-        <ion-col col-8 col-sm-10 text-center>
+    <div class="div-button">
+      <ion-row>
+        <ion-col col-12 col-sm-12 text-center>
           
-            <button ion-button block (click)="login()" color="primary" class="btn-login">Entrar</button>
+            <button type="submit" ion-button block color="light" class="btn-login" round medium>Entrar</button>
           
-      </ion-col>
+        </ion-col>
       </ion-row>
+    </div>
 </ion-grid>
+</form>
   
 
 </div>
