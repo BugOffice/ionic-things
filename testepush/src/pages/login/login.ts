@@ -1,6 +1,6 @@
 import { UsersProvider } from './../../providers/users/users';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
 
@@ -17,7 +17,8 @@ export class LoginPage {
     private toast: ToastController, 
     private userProvider: UsersProvider,
     public loadingCtrl: LoadingController,
-    public storage: Storage
+    public storage: Storage,
+    private alertCtrl: AlertController
   ) 
     {
 
@@ -26,6 +27,8 @@ export class LoginPage {
       this.model.password = '';
       this.model.token = '';
     }
+
+    
 
   login() {
     console.log(this.model.crm+"\n"+this.model.password);
@@ -52,29 +55,34 @@ export class LoginPage {
         //this.navCtrl.setRoot()
       })
       .catch((error: any) => {
-        this.toast.create({ message: 'Erro ao efetuar login. Erro: ' + error.error, position: 'botton', duration: 3000 }).present();
+        this.presentAlertInvalidLogin();
       });
       this.presentLoading();
     }else{
-        let toast = this.toast.create({
-        message: 'Preencha os dados de login corretamente!',
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      this.presentAlertInvalidLogin();
+      }
     }
-  }
+  
 
   presentLoading() {
     this.loadingCtrl.create({
       content: 'Por favor aguarde...',
-      duration: 5000,
+      duration: 2000,
       dismissOnPageChange: true
     }).present();
   }
 
   openHomePage(){
     this.navCtrl.setRoot(HomePage,this.model);
+  }
+
+  presentAlertInvalidLogin() {
+    let alert = this.alertCtrl.create({
+      title: 'Login',
+      subTitle: 'Usuário ou senha inválido!',
+      buttons: ['Ok']
+    });
+    alert.present();
   }
 
 
